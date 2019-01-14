@@ -1,6 +1,6 @@
 # Feuerwand
 
-An iptables framework for ipv4 & ipv6 with basic protection presets.
+An iptables framework for ipv4 & ipv6 with basic protection (rate limiting) and docker support.
 
 ## Installation
 
