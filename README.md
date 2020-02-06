@@ -12,6 +12,10 @@ cp custom.sample.sh custom.sh
 
 Edit `custom.sh` and adjust everything to your needs.
 
+### Make `feuerwand` command accessible ###
+
+`ln -s /yourpath/feuerwand /usr/local/bin/`
+
 ### Automatic start after boot
 `crontab -e`
 
