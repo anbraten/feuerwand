@@ -8,7 +8,7 @@
 # Description:       Iptables service script
 ### END INIT INFO
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+DIR="$(dirname "$(test -L "$0" && readlink "$0" || echo "$0")")"
 
 START_SCRIPT=$DIR/src/start.sh
 STOP_SCRIPT=$DIR/src/stop.sh
@@ -19,21 +19,21 @@ LOGFILE=/var/log/feuerwand.log
 
 start() {
   if [ -f /var/run/$PIDNAME ] && kill -0 $(cat /var/run/$PIDNAME); then
-    echo 'Service already running' >&2
+    echo 'Feuerwand already running' >&2
     return 1
   fi
-  echo 'Starting service ...' >&2
+  echo 'Starting Feuerwand ...' >&2
   local CMD="$START_SCRIPT &>> \"$LOGFILE\" & echo \$!"
   su -c "$CMD" $RUNAS > "$PIDFILE"
-  echo 'Service started' >&2
+  echo 'Feuerwand started' >&2
 }
 
 stop() {
-  echo 'Stopping service ...' >&2
+  echo 'Stopping Feuerwand ...' >&2
   # kill -15 $(cat "$PIDFILE") && rm -f "$PIDFILE"
   local CMD="$STOP_SCRIPT &>> \"$LOGFILE\" & echo \$!"
   su -c "$CMD" $RUNAS > /dev/null
-  echo 'Service stopped' >&2
+  echo 'Feuerwand stopped' >&2
 }
 
 case "$1" in
@@ -43,7 +43,7 @@ case "$1" in
   stop)
     stop
     ;;
-  retart)
+  restart)
     stop
     start
     ;;
